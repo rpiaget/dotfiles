@@ -1,16 +1,10 @@
 ## Fix for "Error fetching variable SECRET_ORG_TOKEN_SECRET: open /dev/null: too many open files" when running make instal-secrets
 ulimit -Sn 8192
 
-## For using vagrant VM as a testing target
 export WEBSITE_DOCROOT="${HOME}/dev/website" # change this to match wherever you cloned this repo.
 export DASH_CLIENT_ENV=dev
 export MACHINE_ENV=dev
 export VHOSTNAME=local.dev.opendns.com
-
-## For using vagrant with local db
-# export LOCAL_MYSQL=true
-# export DEV_DB_MAIN_HOST=172.27.72.27
-# export DEV_DB_AUDITLOG_HOST=172.27.72.27
 
 ## Git Completions
 source ~/bin/git-completion.bash
@@ -20,10 +14,6 @@ export WORKON_HOME=$HOME/.virtualenvs
 # export PROJECT_HOME=$HOME/Dropbox/Projects
 export PROJECT_HOME=$HOME/dev
 source /usr/local/bin/virtualenvwrapper.sh
-
-# Vinz
-export VINZ_USERNAME="rpiaget"
-export VINZ_PASSWORD="Tqbfj0tld"
 
 # Brain (these don't seem to load properly...)
 export SECRET_BRAIN_SSL_CERT="-----BEGIN CERTIFICATE-----
@@ -54,37 +44,16 @@ export SECRET_BRAIN_API_TOKEN="3DB1C62950384915AEAB7E1A97E36FAB"
 
 # Docker
 alias dc="docker container"
+alias dcup="docker-compose -f docker-compose.yml -f docker-compose74.yml up -dV"
+
 
 # Docker Compose
 USER=$(cat ~/.quadrarc | jq -r '.username')
 PASS=$(cat ~/.quadrarc | jq -r '.token')
 # echo ${PASS} | docker login images.quadra.opendns.com -u ${USER} --password-stdin
 
-# AWS
-alias p1="sl aws session generate --role-name engineer --account-id 067346688434 --region us-west-1"
-alias d1="sl aws session generate --role-name engineer --account-id 522072180890 --region us-west-1"
-alias e1="sl aws session generate --role-name engineer --account-id 711911407174 --region us-west-1"
-alias hydra-prod-enginer="sl aws session generate --role-name engineer --account-id 018084539391"
-alias hydra-prod-owner="sl aws session generate --role-name owner --account-id 018084539391"
-alias hydra-stage-enginer="sl aws session generate --role-name engineer --account-id 533633153805"
-alias hydra-stage-owner="sl aws session generate --role-name owner --account-id 533633153805"
-
-function sllogin() {
-    OUTPUT=$(sl aws session generate --account-id ${ACCOUNT_ID} --role-name ${ROLE})
-    URL=$(echo "${OUTPUT}" | grep 'signin.aws.amazon.com')
-    if [[ "$URL" == "" ]]; then
-        echo "$OUTPUT"
-    else
-        open "${URL}"
-    fi
-}
-
-alias cdfw-aws="ROLE=owner ACCOUNT_ID=304825482992 sllogin"
-alias slu="sl upgrade"
-
-# Streamline
+# Datadog
 alias datadog="sl monitor datadog login --org-id k2fdafqfqt4t8t4d"
-export STRLN_AUTH=true
 
 
 # Useful Command Line Stuff
@@ -119,7 +88,7 @@ export PATH="/usr/local/opt/mysql@5.6/bin:$PATH"
 export GOPATH="$HOME/dev/go"
 export GOBIN="$GOPATH/bin"
 export PATH="$GOBIN:$PATH"
-export GOMODULE111=off
+export GOMODULE111="on"
 alias switch-gopath-to-work="export GOPATH=/Users/rpiaget/dev/go"
 alias switch-gopath-to-personal="export GOPATH=/Users/rpiaget/Dropbox/Projects/Exercism/go"
 alias swagger="docker run --rm -it  --user $(id -u):$(id -g) -e GOPATH=$HOME/go:/go -v $HOME:$HOME -w $(pwd) quay.io/goswagger/swagger"
@@ -130,6 +99,7 @@ export PATH="$HOME/dev/apache-maven-3.8.2/bin:$PATH"
 
 ### KNEX ###
 # streamline and docker functions
+export STRLN_AUTH=true
 function sllogin() {
     OUTPUT=$(sl aws session generate --account-id ${ACCOUNT_ID} --role-name ${ROLE})
     URL=$(echo "${OUTPUT}" | grep 'signin.aws.amazon.com')
@@ -140,26 +110,66 @@ function sllogin() {
     fi
 }
 
+function website-secrets() {
+    ulimit -Sn 4096
+    sl iam token refresh
+    sl aws session generate --account-id 536665735667 --role-name dashweb-aws-dev-secrets-access --profile dashweb-aws-dev-secrets-access --region us-west-2 && export AWS_PROFILE="dashweb-aws-dev-secrets-access" && export AWS_REGION="us-west-2"
+    make install-secrets
+}
+
+function website-pull() {
+    docker-compose down
+    $(sl container registry auth generate)
+    docker-compose pull
+}
+
+website-rebuild() {
+   website-secrets
+    website-pull
+    bin/dockerized build make composer
+    bin/dockerized easydev make dash-build
+}
+
 alias cdfw-aws="ROLE=owner ACCOUNT_ID=304825482992 sllogin"
 alias slu="sl upgrade"
+# alias website-secrets="ROLE=dashweb-aws-dev-secrets-access ACCOUNT_ID=536665735667 sllogin"
+alias website-secrets="website-secrets"
+alias website-rebuild="website-rebuild"
 
 function sll() {
     sl iam token refresh || sl login --username $USER@cisco.com
 
     eval $(sl container registry auth generate)
 }
-###
+
+### Local DB ###
+alias mysql-local="mysql -u accounts_dev -pdevelopment -h 127.0.0.1 accounts"
+
+### APIv3 ###
+export APIV3_ENDPOINT=http://api.local.dev.opendns.com/v3 # typically this localhost address
+export APIV3_TOKEN='4B6D025B83D2156C4FAB26C1AADE1846'
+export APIV3_KEY='4237E654D1A98ACA7AB52179D2FE3EC4'
+
+### OAuth/Umbrella Token
+export ACCESS_TOKEN=$(curl -u "$CDFW_CLIENT_ID:$CDFW_CLIENT_SECRET" $KONG_PROXY_API/auth/v2/oauth2/token | jq -r .access_token)
+alias getAccessToken="curl -u "$CDFW_CLIENT_ID:$CDFW_CLIENT_SECRET" $KONG_PROXY_API/auth/v2/oauth2/token | jq -r .access_token"
 
 # Misc
 alias builddamnit='git commit -m "build damnit" --allow-empty && git push'
 alias myip="dig +short myip.opendns.com @resolver1.opendns.com"
 alias visudo="EDITOR=vi sudo visudo"
-alias upload-migration-file-to-m48="scp migration.json root@m48.sjc.opendns.com:/root/rpiaget/"
 
 export GIT_SSH_KEY=$(cat ~/.ssh/id_rsa)
 
+#NVM / Node
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+
+# Hack for setting default node version on new bash start
+nvm use default
+
+### Env
+source ~/.env
 
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash

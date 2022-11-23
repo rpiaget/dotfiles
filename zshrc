@@ -8,7 +8,6 @@ export LSCOLORS="gxfxexdxcxegedabagacad"
 # Useful Command Line Stuff
 alias ll='ls -lhGAF'
 alias ls='ls -GAF'
-alias path='echo -e ${PATH//:/\n}'
 alias path='echo $PATH'
 alias ..='cd ..'
 

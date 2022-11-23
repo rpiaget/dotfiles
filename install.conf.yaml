@@ -8,6 +8,22 @@
     ~/.vimrc:
     ~/.zshrc:
     ~/.bashrc:
+    ~/.docker:
+    ~/.dockercfg:
+    ~/.env:
+    ~/.fzf.bash:
+    ~/.fzf.zsh:
+    ~/.gitconfig:
+    ~/.npm:
+    ~/.npmrc:
+    ~/.nvm:
+    ~/.sl:
+    ~/.tldrc:
+    ~/.yarn:
+    ~/.yarnrc:
+
+
+
 
 - create:
     - ~/Work
