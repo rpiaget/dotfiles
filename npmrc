@@ -1,0 +1,3 @@
+progress=false
+registry= https://engci-maven-master.cisco.com/artifactory/api/npm/umbrella-npm/
+python = "/usr/bin/python2.7"

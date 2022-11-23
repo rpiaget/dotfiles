@@ -1,0 +1,33 @@
+[user]
+	# email = rpiaget@opendns.com
+	email = rpiaget@gmail.com
+	name = Ryan Piaget
+
+[color]
+	diff = auto
+	status = auto
+	branch = auto
+	interactive = auto
+	ui = auto
+	pager = true
+
+[core]
+  	editor = /usr/bin/vim
+[alias]
+	co = checkout
+	cm = commit -m
+	ci = commit
+	st = status
+	br = branch
+	ap = add -p
+	poh = push origin HEAD
+	diffc = diff --cached
+	rb = for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'
+	rb-remote = for-each-ref --sort=committerdate refs/remotes/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'
+[url "git@github.office.opendns.com:"]
+	insteadOf = https://github.office.opendns.com/
+[safe]
+	directory = /website
+	directory = /website
+	directory = /website
+	directory = /website
