@@ -15,33 +15,6 @@ export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/dev
 source /usr/local/bin/virtualenvwrapper.sh
 
-# Brain (these don't seem to load properly...)
-export SECRET_BRAIN_SSL_CERT="-----BEGIN CERTIFICATE-----
-MIID/TCCAuWgAwIBAgIJAJIkg2uh8mXhMA0GCSqGSIb3DQEBCwUAMIGEMQswCQYD
-VQQGEwJVUzETMBEGA1UECAwKQ2FsaWZvcm5pYTEWMBQGA1UEBwwNU2FuIEZyYW5j
-aXNjbzEWMBQGA1UECgwNT3BlbkROUywgSW5jLjEPMA0GA1UECwwGQnJhaW4zMR8w
-HQYDVQQDDBZCcmFpbjMgT3BlbkROUyBSb290IENBMB4XDTE1MDQyMTE4MTg0MFoX
-DTI1MDQxODE4MTg0MFowgYQxCzAJBgNVBAYTAlVTMRMwEQYDVQQIDApDYWxpZm9y
-bmlhMRYwFAYDVQQHDA1TYW4gRnJhbmNpc2NvMRYwFAYDVQQKDA1PcGVuRE5TLCBJ
-bmMuMQ8wDQYDVQQLDAZCcmFpbjMxHzAdBgNVBAMMFkJyYWluMyBPcGVuRE5TIFJv
-b3QgQ0EwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDTk3blcbvd2K7l
-H7j8lbl8eLq53kqJxrjIV1J2dh8UyweGKeoRfWB94b47xHA9rawMXeUFtNuFRROr
-QW5oDSZpjjX02PA+lZoJpVIXICDp3+PBiCGKNJ4haTEwUDZz3Gybpgu1wpqy/1v5
-6Ag9tnx7vZrwIXJxzG92zrQRMNdpECPdTd37XHtIbwhVZ7P+dmGXjD4Vj5SJ3p6M
-JjgFf65ZC9u7F9FLkn168LgP8U87v62j3D4E+LHr4TVIl8j8egeK6qCrZJUVu4ww
-WTRnyKQqcDe5Kg9+x+SYJC35GcF2MzWLosOsPX2+kfsleI0XtzkzQKTc/fGobHXq
-QOGpeZYxAgMBAAGjcDBuMB0GA1UdDgQWBBTWXMLe1femnd+Gz0jwVPRmOlF1kzAf
-BgNVHSMEGDAWgBTWXMLe1femnd+Gz0jwVPRmOlF1kzAMBgNVHRMEBTADAQH/MAsG
-A1UdDwQEAwIBhjARBglghkgBhvhCAQEEBAMCAQYwDQYJKoZIhvcNAQELBQADggEB
-AFBlwaIu0vF1KR/Q5gYxaI9AYd4GST3m/uVKeuF2H9Uw0aCaOO5DdMbdCFng33QF
-BD2GpwznuJ3C+MXSdInhJwaae+fjM57RGLV/79wuLTZCqHaqRBMFOtzWi1Qa4NUv
-IlFcAXEKb/qJ6JdRC4rZhM/6V+VNr6VQaU5ZzHmIiWfaCE5EwuWgr+9c46W75eqU
-hCC+4RxHdD9Bf2kjgMm1U+VeE6Mp+vzMjR+f8IFKc9miPvbW+ep6rgV1XyYAomGi
-lc0JtljZX01MqM5bA1Onue/3qNsKcBS1mmcf43TTp/SXBEN0ShUcC1uVtZBKMhI0
-1BroptS+UtKAaLZQgxiurmE=
------END CERTIFICATE-----"
-export SECRET_BRAIN_API_TOKEN="3DB1C62950384915AEAB7E1A97E36FAB"
-
 # Docker
 alias dc="docker container"
 alias dcup="docker-compose -f docker-compose.yml -f docker-compose74.yml up -dV"
@@ -82,7 +55,8 @@ export PATH="/usr/local/opt/php@5.6/sbin:$PATH"
 export PATH="${WEBSITE_DOCROOT}/vendor/bin:${WEBSITE_DOCROOT}/bin:${PATH}"
 export PATH="~/.local/bin:$PATH"
 export PATH="/usr/local/opt/mysql@5.6/bin:$PATH"
-
+export PATH=/usr/local/opt/gnu-sed/gnubin:/usr/local/opt/coreutils/gnubin:/usr/local/opt/findutils/gnubin:$PATH
+export PATH=/usr/local/opt/bash/bin:/Users/ryanpiaget/dev/apache-maven-3.8.2/bin:/Users/ryanpiaget/dev/go/bin:/usr/local/opt/mysql@5.6/bin:~/.local/bin:/Users/ryanpiaget/dev/website/vendor/bin:/Users/ryanpiaget/dev/website/bin:/usr/local/opt/php@5.6/sbin:/usr/local/opt/php@5.6/bin:/usr/local/bin:/Users/ryanpiaget/dev/apache-maven-3.8.2/bin:/Users/ryanpiaget/dev/go/bin:/usr/local/opt/mysql@5.6/bin:~/.local/bin:/Users/ryanpiaget/dev/website/vendor/bin:/Users/ryanpiaget/dev/website/bin:/usr/local/opt/php@5.6/sbin:/usr/local/opt/php@5.6/bin:/usr/local/bin:/Users/ryanpiaget/dev/apache-maven-3.8.2/bin:/Users/ryanpiaget/dev/go/bin:/usr/local/opt/mysql@5.6/bin:~/.local/bin:/Users/ryanpiaget/dev/website/vendor/bin:/Users/ryanpiaget/dev/website/bin:/usr/local/opt/php@5.6/sbin:/usr/local/opt/php@5.6/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/opt/fzf/bin
 
 # Golang
 export GOPATH="$HOME/dev/go"
@@ -172,7 +146,16 @@ nvm use default
 source ~/.env
 
 
+# FZF
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+alias fzp="fzf --preview 'bat --color=always --style=numbers --line-range=:500 {}'"
+
+# Bat
+alias man="batman"
+alias cat="bat"
+
 if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init -)"
 fi
+
+source /Users/ryanpiaget/.local/opt/fzf-obc/bin/fzf-obc.bash
