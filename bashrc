@@ -7,7 +7,10 @@ export MACHINE_ENV=dev
 export VHOSTNAME=local.dev.opendns.com
 
 ## Git Completions
-source ~/bin/git-completion.bash
+if [ -f `brew --prefix`/etc/bash_completion.d/git-completion.bash ]; then
+  . `brew --prefix`/etc/bash_completion.d/git-completion.bash
+fi
+
 
 # VirtualEnv
 export WORKON_HOME=$HOME/.virtualenvs
@@ -17,13 +20,11 @@ source /usr/local/bin/virtualenvwrapper.sh
 
 # Docker
 alias dc="docker container"
-alias dcup="docker-compose -f docker-compose.yml -f docker-compose74.yml up -dV"
 
 
 # Docker Compose
 USER=$(cat ~/.quadrarc | jq -r '.username')
 PASS=$(cat ~/.quadrarc | jq -r '.token')
-# echo ${PASS} | docker login images.quadra.opendns.com -u ${USER} --password-stdin
 
 # Datadog
 alias datadog="sl monitor datadog login --org-id k2fdafqfqt4t8t4d"
