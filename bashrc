@@ -9,14 +9,15 @@ export VHOSTNAME=local.dev.opendns.com
 ## Git Completions
 if [ -f `brew --prefix`/etc/bash_completion.d/git-completion.bash ]; then
   . `brew --prefix`/etc/bash_completion.d/git-completion.bash
+  echo 'hey hey hey hey'
 fi
 
 
 # VirtualEnv
-export WORKON_HOME=$HOME/.virtualenvs
+# export WORKON_HOME=$HOME/.virtualenvs
 # export PROJECT_HOME=$HOME/Dropbox/Projects
-export PROJECT_HOME=$HOME/dev
-source /usr/local/bin/virtualenvwrapper.sh
+# export PROJECT_HOME=$HOME/dev
+# source /usr/local/bin/virtualenvwrapper.sh
 
 # Docker
 alias dc="docker container"
@@ -134,14 +135,15 @@ alias builddamnit='git commit -m "build damnit" --allow-empty && git push'
 alias myip="dig +short myip.opendns.com @resolver1.opendns.com"
 alias visudo="EDITOR=vi sudo visudo"
 
-export GIT_SSH_KEY=$(cat ~/.ssh/id_rsa)
+# export GIT_SSH_KEY=$(cat ~/.ssh/id_rsa)
 
 #NVM / Node
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+source $(brew --prefix nvm)/nvm.sh
+# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 
 # Hack for setting default node version on new bash start
-nvm use default
+# nvm use default
 
 ### Env
 source ~/.env
