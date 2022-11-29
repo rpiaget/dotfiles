@@ -8,15 +8,13 @@
     ~/.vimrc:
     ~/.zshrc:
     ~/.bashrc:
-    ~/.docker:
-    ~/.dockercfg:
     ~/.env:
     ~/.fzf.bash:
     ~/.fzf.zsh:
     ~/.gitconfig:
     ~/.npmrc:
-    ~/.sl:
     ~/.yarnrc:
+    ~/.quadrarc:
 
 
 - create:

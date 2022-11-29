@@ -1,8 +1,0 @@
-{
-	"auths": {
-		"https://registry.strln.net": {},
-		"registry.strln.net": {}
-	},
-	"credsStore": "osxkeychain",
-	"stackOrchestrator": "swarm"
-}
