@@ -12,6 +12,7 @@
     ~/.fzf.bash:
     ~/.fzf.zsh:
     ~/.gitconfig:
+    ~/.git-completion.bash:
     ~/.npmrc:
     ~/.yarnrc:
     ~/.quadrarc:

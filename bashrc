@@ -12,17 +12,6 @@ if [ -f `brew --prefix`/etc/bash_completion.d/git-completion.bash ]; then
   echo 'hey hey hey hey'
 fi
 
-
-# VirtualEnv
-# export WORKON_HOME=$HOME/.virtualenvs
-# export PROJECT_HOME=$HOME/Dropbox/Projects
-# export PROJECT_HOME=$HOME/dev
-# source /usr/local/bin/virtualenvwrapper.sh
-
-# Docker
-alias dc="docker container"
-
-
 # Docker Compose
 USER=$(cat ~/.quadrarc | jq -r '.username')
 PASS=$(cat ~/.quadrarc | jq -r '.token')
@@ -72,6 +61,9 @@ alias swagger="docker run --rm -it  --user $(id -u):$(id -g) -e GOPATH=$HOME/go:
 # Java
 export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_92.jdk/Contents/Home"
 export PATH="$HOME/dev/apache-maven-3.8.2/bin:$PATH"
+
+# Python
+export PATH="/Users/ryanpiaget/Library/Python/3.9/bin:$PATH"
 
 ### KNEX ###
 # streamline and docker functions
@@ -123,8 +115,12 @@ alias mysql-local="mysql -u accounts_dev -pdevelopment -h 127.0.0.1 accounts"
 
 ### APIv3 ###
 export APIV3_ENDPOINT=http://api.local.dev.opendns.com/v3 # typically this localhost address
+export API_URL=http://api.local.dev.opendns.com/v3
+export APIV3_FIXTURES_VHOST='local.dev.opendns.com'
 export APIV3_TOKEN='4B6D025B83D2156C4FAB26C1AADE1846'
 export APIV3_KEY='4237E654D1A98ACA7AB52179D2FE3EC4'
+export APIV3_USE_TOKEN=true
+
 
 ### OAuth/Umbrella Token
 export ACCESS_TOKEN=$(curl -u "$CDFW_CLIENT_ID:$CDFW_CLIENT_SECRET" $KONG_PROXY_API/auth/v2/oauth2/token | jq -r .access_token)
