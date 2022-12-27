@@ -5,14 +5,13 @@
 - clean: ['~']
 
 - link:
+    ~/.zsh:
     ~/.vimrc:
-    ~/.zshrc:
     ~/.bashrc:
-    ~/.env:
+    ~/.zshrc:
     ~/.fzf.bash:
     ~/.fzf.zsh:
     ~/.gitconfig:
-    ~/.git-completion.bash:
     ~/.npmrc:
     ~/.yarnrc:
     ~/.quadrarc:

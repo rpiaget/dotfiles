@@ -1,3 +1,4 @@
+echo "running bashrc..."
 ## Fix for "Error fetching variable SECRET_ORG_TOKEN_SECRET: open /dev/null: too many open files" when running make instal-secrets
 ulimit -Sn 8192
 
@@ -6,18 +7,13 @@ export DASH_CLIENT_ENV=dev
 export MACHINE_ENV=dev
 export VHOSTNAME=local.dev.opendns.com
 
-## Git Completions
-if [ -f `brew --prefix`/etc/bash_completion.d/git-completion.bash ]; then
-  . `brew --prefix`/etc/bash_completion.d/git-completion.bash
-  echo 'hey hey hey hey'
-fi
-
 # Docker Compose
 USER=$(cat ~/.quadrarc | jq -r '.username')
 PASS=$(cat ~/.quadrarc | jq -r '.token')
 
 # Datadog
-alias datadog="sl monitor datadog login --org-id k2fdafqfqt4t8t4d"
+# alias datadog="sl monitor datadog login --org-id k2fdafqfqt4t8t4d"
+alias datadog-knex="sl monitor datadog login --org-id uqib98o49d0pfqhz"
 
 
 # Useful Command Line Stuff
@@ -35,7 +31,6 @@ export EDITOR="sublime -w"
 
 ## Terminal Formatting
 export PS1='\[\033[0;32m\]\[\033[0m\033[0;32m\]\u\[\033[0;36m\] @ \w\[\033[0;33;1m\] - [$(git branch 2>/dev/null | grep "^*" | colrm 1 2)\[\033[0;33;1m\]]\[\033[0m\033[0;32;1m\] \$\[\033[0m\033[0;32;1m\]\[\033[0m\] '
-# export PS1='\[\033[0;32m\]\[\033[0m\033[0;32m\]\u\[\033[0;36m\] @ \w\[\033[0;33;1m\] - [$(git branch 2>/dev/null | grep "^*" | colrm 1 2)\[\033[0;33;1m\]]\[\033[0m\033[0;32m\] \$\[\033[0m\033[0;32m\]\[\033[0m\] '
 export HISTTIMEFORMAT="%d/%m/%y %T "
 export LSCOLORS="gxfxexdxcxegedabagacad"
 
@@ -91,8 +86,8 @@ function website-pull() {
     docker-compose pull
 }
 
-website-rebuild() {
-   website-secrets
+function website-rebuild() {
+    website-secrets
     website-pull
     bin/dockerized build make composer
     bin/dockerized easydev make dash-build
@@ -153,8 +148,10 @@ alias fzp="fzf --preview 'bat --color=always --style=numbers --line-range=:500 {
 alias man="batman"
 alias cat="bat"
 
+
+
 if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init -)"
 fi
 
-source /Users/ryanpiaget/.local/opt/fzf-obc/bin/fzf-obc.bash
+# source /Users/ryanpiaget/.local/opt/fzf-obc/bin/fzf-obc.bash
