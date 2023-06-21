@@ -1,4 +1,3 @@
-# Taps (Repos)
 tap "aws/tap"
 tap "cyberark/tools"
 tap "eth-p/software"
@@ -6,8 +5,6 @@ tap "homebrew/bundle"
 tap "homebrew/cask"
 tap "homebrew/core"
 tap "warrensbox/tap"
-
-# Brews (Packages)
 brew "automake"
 brew "aws-sam-cli"
 brew "docutils"
@@ -19,13 +16,14 @@ brew "bash-completion@2", link: false
 brew "bat"
 brew "cdb"
 brew "coreutils"
-brew "docker"
-brew "docker-compose"
+brew "docker", link: false
+brew "docker-compose", link: false
 brew "exa"
 brew "findutils"
 brew "fzf"
 brew "gnu-sed"
 brew "go"
+brew "httpie"
 brew "iproute2mac"
 brew "jq"
 brew "libfido2"
@@ -46,10 +44,8 @@ brew "yarn"
 brew "z"
 brew "cyberark/tools/summon"
 brew "eth-p/software/bat-extras"
-
-# Casks (Applications)
-cask "dropbox"
 cask "betterdisplay"
+cask "gitkraken"
 cask "godot"
 cask "insomnia"
 cask "istat-menus"
@@ -62,8 +58,6 @@ cask "steam"
 cask "todoist"
 cask "virtualbox"
 cask "visual-studio-code"
-
-# VS Code Extensions
 vscode "42Crunch.vscode-openapi"
 vscode "4ops.terraform"
 vscode "alefragnani.Bookmarks"

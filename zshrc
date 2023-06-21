@@ -1,3 +1,6 @@
+# Set Variables
+export HOMEBREW_CASK_OPTS="--no-quarantine"
+
 ### Version Control ###
 autoload -Uz vcs_info
 precmd() { vcs_info }
@@ -5,7 +8,6 @@ precmd() { vcs_info }
 ### Terminal Formatting ###
 # Setup Git branch details
 zstyle ':vcs_info:git:*' formats '%b' # Source: https://arjanvandergaag.nl/blog/customize-zsh-prompt-with-vcs-info.html
-
 zstyle ':completion:*:*:git:*' script ~/.zsh/git-completion.bash
 fpath=(~/.zsh $fpath)
 
