@@ -10,5 +10,6 @@ I learned about dotfiles at [dotfiles.eieio.xyz](https://www.udemy.com/course/do
 - Trackpad (am I using the defaults?)
 - Git (Config and SSH)
 - bat zshrc could be more colorful
-
-- this is a test
+- install pokertracker (is there a brew, it's not's in appstore, how do I automate apps not in brew or appstore)
+- Turn off Spotlight shortcut and use for Alfred
+- Switch capslock and control in keyboard settings

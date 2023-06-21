@@ -16,3 +16,9 @@ echo "\n--- Starting Homebrew Install ---\n"
 # brew install --cask --no-quarantine alfred
 
 brew bundle --verbose
+
+### Misc manual installs ###
+
+# Terraform Switcher (for switching between versions of Terraform)
+curl -L https://raw.githubusercontent.com/warrensbox/terraform-switcher/release/install.sh | bash
+tfswitch -l

@@ -53,6 +53,8 @@ brew "libfido2"
 brew "libpng"
 # Zstandard is a real-time compression algorithm
 brew "zstd"
+# Mac App Store command-line interface
+brew "mas"
 # Open source relational database management system
 brew "mysql@5.7"
 # Netwide Assembler (NASM) is an 80x86 assembler
@@ -111,6 +113,18 @@ cask "todoist"
 cask "virtualbox"
 # Open-source code editor
 cask "visual-studio-code"
+mas "CleanMyMac X", id: 1339170533
+mas "Display Menu", id: 549083868
+mas "Divvy", id: 413857545
+mas "EasyRes", id: 688211836
+mas "Fantastical", id: 975937182
+mas "Instapaper", id: 288545208
+mas "Kindle", id: 405399194
+mas "Messenger", id: 1480068668
+mas "MKPlayer", id: 1335612105
+mas "NordVPN", id: 905953485
+mas "Reeder", id: 1529448980
+mas "Save to Raindrop.io", id: 1549370672
 vscode "42Crunch.vscode-openapi"
 vscode "4ops.terraform"
 vscode "alefragnani.Bookmarks"
