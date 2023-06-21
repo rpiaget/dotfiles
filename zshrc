@@ -1,5 +1,6 @@
 # Set Variables
 export HOMEBREW_CASK_OPTS="--no-quarantine"
+export USER="ryanpiaget" # setting this manually is probably a bad idea but some homebrew installs fail without it because USER autosets to rpiaget
 
 # Create Aliases
 alias exa="exa -laFh --git"
@@ -82,8 +83,8 @@ alias app-connector-aws="ROLE=engineer ACCOUNT_ID=097151423082 sllogin"
 alias datadog-knex="sl monitor datadog login --org-id uqib98o49d0pfqhz"
 
 ### Quadra ###
-export USER=$(cat ~/.quadrarc | jq -r '.username')
-export PASS=$(cat ~/.quadrarc | jq -r '.token')
+# export USER=$(cat ~/.quadrarc | jq -r '.username')
+# export PASS=$(cat ~/.quadrarc | jq -r '.token')
 
 ### OAuth/Umbrella Token ###
 export ACCESS_TOKEN=$(curl -u "$CDFW_CLIENT_ID:$CDFW_CLIENT_SECRET" $KONG_PROXY_API/auth/v2/oauth2/token | jq -r .access_token)

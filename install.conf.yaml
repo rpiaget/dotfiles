@@ -21,7 +21,4 @@
     - ~/Work
 
 - shell:
-#   - [git submodule update --init --recursive, Installing submodules]
-  - echo "hey you guys"
-
-  command: ./setup_homebrew.zsh
+  - command: ./setup_homebrew.zsh

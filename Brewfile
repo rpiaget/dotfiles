@@ -81,8 +81,6 @@ brew "tree"
 brew "yarn"
 # Tracks most-used directories to make cd smarter
 brew "z"
-# CLI that provides on-demand secrets access for common DevOps tools.
-brew "cyberark/tools/summon"
 # Bash scripts that integrate bat with various command-line tools
 brew "eth-p/software/bat-extras"
 # Display management tool
