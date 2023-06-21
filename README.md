@@ -10,3 +10,5 @@ I learned about dotfiles at [dotfiles.eieio.xyz](https://www.udemy.com/course/do
 - Trackpad (am I using the defaults?)
 - Git (Config and SSH)
 - bat zshrc could be more colorful
+
+- this is a test
