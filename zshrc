@@ -1,6 +1,10 @@
 # Set Variables
 export HOMEBREW_CASK_OPTS="--no-quarantine"
 
+# Create Aliases
+alias exa="exa -laFh --git"
+alias ls="exa -laFh --git"
+
 ### Version Control ###
 autoload -Uz vcs_info
 precmd() { vcs_info }
@@ -97,8 +101,8 @@ export NVM_DIR="$HOME/.nvm"
 source $(brew --prefix nvm)/nvm.sh
 
 ### Useful Command Line Stuff ###
-alias ll='ls -lhGAF'
-alias ls='ls -GAF'
+# alias ll='ls -lhGAF'
+# alias ls='ls -GAF'
 alias path="echo $PATH | tr ':' '\n'"
 alias ..='cd ..'
 alias sortedenv="env | sort"
