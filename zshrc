@@ -1,129 +1,125 @@
-# Set Variables
-export HOMEBREW_CASK_OPTS="--no-quarantine"
-export USER="ryanpiaget" # setting this manually is probably a bad idea but some homebrew installs fail without it because USER autosets to rpiaget
+# Portable interactive Zsh configuration.
 
-# Create Aliases
-alias exa="exa -laFh --git"
-alias ls="exa -laFh --git"
+[[ -o interactive ]] || return 0
 
-### Version Control ###
-autoload -Uz vcs_info
-precmd() { vcs_info }
+# Homebrew
+if [[ -x /opt/homebrew/bin/brew ]]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+elif [[ -x /usr/local/bin/brew ]]; then
+  eval "$(/usr/local/bin/brew shellenv)"
+fi
 
-### Terminal Formatting ###
-# Setup Git branch details
-zstyle ':vcs_info:git:*' formats '%b' # Source: https://arjanvandergaag.nl/blog/customize-zsh-prompt-with-vcs-info.html
-zstyle ':completion:*:*:git:*' script ~/.zsh/git-completion.bash
-fpath=(~/.zsh $fpath)
+# Paths
+typeset -U path PATH
+path=("$HOME/.local/bin" "$HOME/bin" $path)
 
-autoload -Uz compinit && compinit
-
-setopt PROMPT_SUBST
-PROMPT='%F{green}%n%f %F{cyan}@ %~%f %F{226}- [${vcs_info_msg_0_}]%f %F{green}$%f '
-export LSCOLORS="gxfxexdxcxegedabagacad" # See this LS Colors tool to create a theme https://geoff.greer.fm/lscolors/
-
-### Env ###
-source ~/.env
-
-### Path ### Todo - separate this out into chunks
-export PATH="$GOPATH/bin:/Users/ryanpiaget/.nvm/versions/node/v12.14.1/bin:/Users/ryanpiaget/Library/Python/3.9/bin:/Users/ryanpiaget/dev/apache-maven-3.8.2/bin:/Users/ryanpiaget/go:/Users/ryanpiaget/go/bin:/usr/local/opt/bash/bin:/Users/ryanpiaget/dev/apache-maven-3.8.2/bin:/usr/local/opt/mysql@5.6/bin:/Users/ryanpiaget/.local/bin:/Users/ryanpiaget/dev/website/vendor/bin:/Users/ryanpiaget/dev/website/bin:/usr/local/opt/php@5.6/sbin:/usr/local/opt/php@5.6/bin:/usr/local/bin:/Users/ryanpiaget/dev/apache-maven-3.8.2/bin:/usr/local/opt/mysql@5.6/bin:/Users/ryanpiaget/.local/bin:/Users/ryanpiaget/dev/website/vendor/bin:/Users/ryanpiaget/dev/website/bin:/usr/local/opt/php@5.6/sbin:/usr/local/opt/php@5.6/bin:/usr/local/bin:/Users/ryanpiaget/dev/apache-maven-3.8.2/bin:/usr/local/opt/mysql@5.6/bin:/Users/ryanpiaget/.local/bin:/Users/ryanpiaget/dev/website/vendor/bin:/Users/ryanpiaget/dev/website/bin:/usr/local/opt/php@5.6/sbin:/usr/local/opt/php@5.6/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/opt/fzf/bin"
-
-### Local Website ###
-export STRLN_AUTH=true
-function sllogin() {
-    OUTPUT=$(sl aws session generate --account-id ${ACCOUNT_ID} --role-name ${ROLE})
-    URL=$(echo "${OUTPUT}" | grep 'signin.aws.amazon.com')
-    if [[ "$URL" == "" ]]; then
-        echo "$OUTPUT"
-    else
-        open "${URL}"
-    fi
-}
-
-function website-secrets() {
-    ulimit -Sn 4096
-    sl iam token refresh
-    sl aws session generate --account-id 536665735667 --role-name dashweb-aws-dev-secrets-access --profile dashweb-aws-dev-secrets-access --region us-west-2 && export AWS_PROFILE="dashweb-aws-dev-secrets-access" && export AWS_REGION="us-west-2"
-    make install-secrets
-}
-
-function website-pull() {
-    docker-compose down
-    $(sl container registry auth generate)
-    docker-compose pull
-}
-
-function website-rebuild() {
-   website-secrets
-    website-pull
-    bin/dockerized build make composer
-    bin/dockerized easydev make dash-build
-}
-
-alias website-secrets="website-secrets"
-alias website-rebuild="website-rebuild"
-
-### Local Website MySQL DB ###
-alias mysql-local="mysql -u accounts_dev -pdevelopment -h 127.0.0.1 accounts"
-
-### Local Website APIv3 ###
-export APIV3_ENDPOINT=http://api.local.dev.opendns.com/v3 # typically this localhost address
-export API_URL=http://api.local.dev.opendns.com/v3
-export APIV3_FIXTURES_VHOST='local.dev.opendns.com'
-export APIV3_TOKEN='4B6D025B83D2156C4FAB26C1AADE1846'
-export APIV3_KEY='4237E654D1A98ACA7AB52179D2FE3EC4'
-export APIV3_USE_TOKEN=true
-
-### KNEX AWS Streamline ###
-alias slu="sl upgrade"
-alias cdfw-aws="ROLE=owner ACCOUNT_ID=304825482992 sllogin"
-alias app-connector-aws="ROLE=engineer ACCOUNT_ID=097151423082 sllogin"
-
-### Datadog ###
-alias datadog-knex="sl monitor datadog login --org-id uqib98o49d0pfqhz"
-
-### Quadra ###
-# export USER=$(cat ~/.quadrarc | jq -r '.username')
-# export PASS=$(cat ~/.quadrarc | jq -r '.token')
-
-### OAuth/Umbrella Token ###
-export ACCESS_TOKEN=$(curl -u "$CDFW_CLIENT_ID:$CDFW_CLIENT_SECRET" $KONG_PROXY_API/auth/v2/oauth2/token | jq -r .access_token)
-alias getUmbrellaAccessToken="curl -u "$CDFW_CLIENT_ID:$CDFW_CLIENT_SECRET" $KONG_PROXY_API/auth/v2/oauth2/token | jq -r .access_token"
-
-### ZTNA Config Producer ###
-# export ZTNA_PRODUCER_JWT=
-alias getZTNAConfigProducerAccessTokenStage="curl -u "$ZTNA_CONFIG_PRODUCER_CLIENT_ID_STAGE:$ZTNA_CONFIG_PRODUCER_CLIENT_SECRET_STAGE" $KONG_PROXY_API_STAGE/auth/v2/oauth2/token | jq -r .access_token"
-alias getTunnelConfigAccessTokenStage="curl -u "$TUNNEL_CONFIG_ID_STAGE:$TUNNEL_CONFIG_SECRET_STAGE" $KONG_PROXY_API_STAGE/auth/v2/oauth2/token | jq -r .access_token"
-
-alias getZTNAConfigProducerAccessTokenProd="curl -u "$ZTNA_CONFIG_PRODUCER_CLIENT_ID_PROD:$ZTNA_CONFIG_PRODUCER_CLIENT_SECRET_PROD" $KONG_PROXY_API/auth/v2/oauth2/token | jq -r .access_token"
-
-### NVM / Node
-export NVM_DIR="$HOME/.nvm"
-source $(brew --prefix nvm)/nvm.sh
-
-### Useful Command Line Stuff ###
-# alias ll='ls -lhGAF'
-# alias ls='ls -GAF'
-alias path="echo $PATH | tr ':' '\n'"
-alias ..='cd ..'
-alias sortedenv="env | sort"
-alias se="sortedenv"
-
-### FZF ###
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-alias fzp="fzf --preview 'bat --color=always --style=numbers --line-range=:500 {}'"
-
-### Bat ###
-alias man="batman"
-alias cat="bat"
-
-### Z (Jump Around) ###
-. $(brew --prefix)/etc/profile.d/z.sh
-
-### Golang ###
 export GOPATH="$HOME/go"
-export PATH="/usr/local/opt/mysql@5.7/bin:$PATH"
+path=("$GOPATH/bin" $path)
 
+if [[ -d "/Applications/Visual Studio Code.app/Contents/Resources/app/bin" ]]; then
+  path=("/Applications/Visual Studio Code.app/Contents/Resources/app/bin" $path)
+fi
 
-# Add Visual Studio Code (code)
-export PATH="/Applications/Visual Studio Code.app/Contents/Resources/app/bin:$PATH"
+# Prompt and Git branch
+autoload -Uz add-zsh-hook vcs_info
+zstyle ':vcs_info:git:*' formats '%b'
+add-zsh-hook precmd vcs_info
+setopt PROMPT_SUBST
+PROMPT='%F{green}%n%f %F{cyan}@ %~%f %F{226}- [${vcs_info_msg_0_}]%f %F{green}%#%f '
+
+# Completion
+fpath=("$HOME/.zsh" $fpath)
+autoload -Uz compinit
+compinit
+
+# Homebrew-installed interactive plugins
+if (( $+commands[brew] )); then
+  _brew_prefix="$(brew --prefix)"
+
+  [[ -r "$_brew_prefix/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh" ]] &&
+    source "$_brew_prefix/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh"
+
+  [[ -r "$_brew_prefix/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ]] &&
+    source "$_brew_prefix/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+
+  [[ -r "$_brew_prefix/opt/fzf/shell/completion.zsh" ]] &&
+    source "$_brew_prefix/opt/fzf/shell/completion.zsh"
+  [[ -r "$_brew_prefix/opt/fzf/shell/key-bindings.zsh" ]] &&
+    source "$_brew_prefix/opt/fzf/shell/key-bindings.zsh"
+
+  [[ -r "$_brew_prefix/etc/profile.d/z.sh" ]] &&
+    source "$_brew_prefix/etc/profile.d/z.sh"
+fi
+
+# Python version management, when installed.
+if (( $+commands[pyenv] )); then
+  eval "$(pyenv init - zsh)"
+fi
+
+# Node version management, when installed through Homebrew.
+if (( $+commands[brew] )); then
+  _nvm_prefix="$(brew --prefix nvm 2>/dev/null)"
+  if [[ -r "$_nvm_prefix/nvm.sh" ]]; then
+    export NVM_DIR="${NVM_DIR:-$HOME/.nvm}"
+    source "$_nvm_prefix/nvm.sh"
+  fi
+fi
+
+# General aliases
+alias ..='cd ..'
+alias path="print -r -- \$PATH | tr ':' '\n'"
+alias sortedenv='env | sort'
+alias se='sortedenv'
+alias sc='source ~/.zshrc'
+
+if (( $+commands[eza] )); then
+  alias eza='eza -lah --git'
+  alias ls='eza -lah --git'
+fi
+
+if (( $+commands[bat] )); then
+  alias cat='bat'
+fi
+
+if (( $+commands[batman] )); then
+  alias man='batman'
+fi
+
+# Toggle the window-management setup used for development.
+devmode() {
+  if pgrep -x AeroSpace >/dev/null 2>&1; then
+    killall AeroSpace borders sketchybar 2>/dev/null
+    print 'Dev Mode disabled'
+  else
+    open -a AeroSpace
+    print 'Dev Mode enabled'
+  fi
+}
+
+# Select a recent local branch interactively.
+gco() {
+  local branch
+  branch="$(git for-each-ref --sort=-committerdate refs/heads/ --format='%(refname:short)' |
+    fzf --height=20% --layout=reverse --border --margin=1)" || return
+  [[ -n "$branch" ]] && git switch "$branch"
+}
+
+# Select a pull request and open it in the browser.
+propen() {
+  local pr
+  pr="$(gh pr list --state all |
+    sed $'s/OPEN/\e[32mOPEN\e[0m/g; s/MERGED/\e[35mMERGED\e[0m/g; s/CLOSED/\e[31mCLOSED\e[0m/g' |
+    fzf --height=12 --layout=reverse --border --margin=1 --ansi |
+    awk '{print $1}')" || return
+  [[ -n "$pr" ]] && gh pr view "$pr" --web
+}
+
+# Optional machine-specific layers. These files are intentionally untracked.
+for _local_zsh in \
+  "$HOME/.config/zsh/local.zsh" \
+  "$HOME/.config/zsh/work.zsh" \
+  "$HOME/.config/zsh/work-claude.zsh"; do
+  [[ -r "$_local_zsh" ]] && source "$_local_zsh"
+done
+
+unset _brew_prefix _local_zsh _nvm_prefix

@@ -1,9 +1,11 @@
 tap "aws/tap"
 tap "cyberark/tools"
 tap "eth-p/software"
+tap "felixkratz/formulae"
 tap "homebrew/bundle"
 tap "homebrew/cask"
 tap "homebrew/core"
+tap "nikitabobko/tap"
 tap "warrensbox/tap"
 # Tool for generating GNU Standards-compliant Makefiles
 brew "automake"
@@ -27,16 +29,14 @@ brew "bat"
 brew "cdb"
 # GNU File, Shell, and Text utilities
 brew "coreutils"
-# Pack, ship and run any application as a lightweight container
-brew "docker", link: false
-# Isolated development environments using Docker
-brew "docker-compose", link: false
 # Modern replacement for 'ls'
-brew "exa"
+brew "eza"
 # Collection of GNU find, xargs, and locate
 brew "findutils"
 # Command-line fuzzy finder written in Go
 brew "fzf"
+# GitHub command-line interface
+brew "gh"
 # GNU implementation of the famous stream editor
 brew "gnu-sed"
 # Open source programming language to build simple/reliable/efficient software
@@ -55,8 +55,6 @@ brew "libpng"
 brew "zstd"
 # Mac App Store command-line interface
 brew "mas"
-# Open source relational database management system
-brew "mysql@5.7"
 # Netwide Assembler (NASM) is an 80x86 assembler
 brew "nasm"
 # Platform built on V8 to build network applications
@@ -65,10 +63,10 @@ brew "node"
 brew "nvm"
 # Code formatter for JavaScript, CSS, JSON, GraphQL, Markdown, YAML
 brew "prettier"
-# Interpreted, interactive, object-oriented programming language
-brew "python@3.10"
-# Interpreted, interactive, object-oriented programming language
-brew "python@3.9"
+# Current Homebrew Python for general-purpose use
+brew "python"
+# Manage project-specific Python versions
+brew "pyenv"
 # Search tool like grep and The Silver Searcher
 brew "ripgrep"
 # User interface to the TELNET protocol
@@ -81,10 +79,22 @@ brew "tree"
 brew "yarn"
 # Tracks most-used directories to make cd smarter
 brew "z"
+# Fish-like autosuggestions for Zsh
+brew "zsh-autosuggestions"
+# Vim key bindings for Zsh
+brew "zsh-vi-mode"
 # Bash scripts that integrate bat with various command-line tools
 brew "eth-p/software/bat-extras"
+# Window borders used by devmode
+brew "felixkratz/formulae/borders"
+# Customizable macOS status bar used by devmode
+brew "felixkratz/formulae/sketchybar"
+# Tiling window manager; configured not to start at login
+cask "nikitabobko/tap/aerospace"
 # Display management tool
 cask "betterdisplay"
+# Docker Engine, Compose, and Desktop UI
+cask "docker-desktop"
 # Git client focusing on productivity
 cask "gitkraken"
 # Game development engine

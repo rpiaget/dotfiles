@@ -7,18 +7,15 @@
 - link:
     ~/.zsh:
     ~/.vimrc:
-    ~/.bashrc:
     ~/.zshrc:
-    ~/.fzf.bash:
-    ~/.fzf.zsh:
     ~/.gitconfig:
     ~/.npmrc:
-    ~/.yarnrc:
-    ~/.quadrarc:
 
 
 - create:
     - ~/Work
+    - ~/.nvm
 
 - shell:
   - command: ./setup_homebrew.zsh
+    description: Install Homebrew packages and applications

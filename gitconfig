@@ -1,7 +1,9 @@
 [user]
-	# email = rpiaget@opendns.com
-	email = rpiaget@gmail.com
 	name = Ryan Piaget
+	email = rpiaget@gmail.com
+
+[includeIf "gitdir:~/Work/"]
+	path = ~/.config/git/work.gitconfig
 
 [color]
 	diff = auto
@@ -12,8 +14,9 @@
 	pager = true
 
 [core]
-  	editor = /usr/bin/vim
-	excludesfile = /Users/ryanpiaget/.gitignore_global
+	editor = /usr/bin/vim
+	excludesfile = ~/.gitignore_global
+
 [alias]
 	co = checkout
 	cm = commit -m
@@ -25,10 +28,3 @@
 	diffc = diff --cached
 	rb = for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'
 	rb-remote = for-each-ref --sort=committerdate refs/remotes/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'
-[url "git@github.office.opendns.com:"]
-	insteadOf = https://github.office.opendns.com/
-[safe]
-	directory = /website
-	directory = /website
-	directory = /website
-	directory = /website
