@@ -17,3 +17,4 @@ elif [[ -x /usr/local/bin/brew ]]; then
 fi
 
 brew bundle --file="$DOTFILES_DIR/Brewfile" --verbose
+brew services start clipaste

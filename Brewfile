@@ -2,6 +2,7 @@ tap "aws/tap"
 tap "cyberark/tools"
 tap "eth-p/software"
 tap "felixkratz/formulae"
+tap "hqhq1025/clipaste"
 tap "homebrew/bundle"
 tap "homebrew/cask"
 tap "homebrew/core"
@@ -27,6 +28,8 @@ brew "bash-completion@2", link: false
 brew "bat"
 # Create and read constant databases
 brew "cdb"
+# Clipboard bridge used by Codex screenshot paste in Ghostty
+brew "hqhq1025/clipaste/clipaste"
 # GNU File, Shell, and Text utilities
 brew "coreutils"
 # Modern replacement for 'ls'
@@ -93,6 +96,14 @@ brew "felixkratz/formulae/sketchybar"
 cask "nikitabobko/tap/aerospace"
 # Display management tool
 cask "betterdisplay"
+# Font used by the SketchyBar configuration
+cask "font-hack-nerd-font"
+# Primary terminal
+cask "ghostty"
+# Launcher and window-command tool
+cask "raycast"
+# Screenshot and OCR utility
+cask "shottr"
 # Docker Engine, Compose, and Desktop UI
 cask "docker-desktop"
 # Git client focusing on productivity
@@ -123,7 +134,6 @@ cask "virtualbox"
 cask "visual-studio-code"
 mas "CleanMyMac X", id: 1339170533
 mas "Display Menu", id: 549083868
-mas "Divvy", id: 413857545
 mas "EasyRes", id: 688211836
 mas "Fantastical", id: 975937182
 mas "Instapaper", id: 288545208

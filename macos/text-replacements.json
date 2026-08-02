@@ -1,0 +1,42 @@
+[
+  {
+    "replace": "omw",
+    "on": 1,
+    "with": "On my way!"
+  },
+  {
+    "replace": "tablefix",
+    "on": 1,
+    "with": " ┬─┬◡ﾉ(° -°ﾉ)"
+  },
+  {
+    "replace": "shrug",
+    "on": 1,
+    "with": "¯\\_(ツ)_/¯"
+  },
+  {
+    "replace": "tblflip",
+    "on": 1,
+    "with": "(╯°□°）╯︵ ┻━┻"
+  },
+  {
+    "replace": "kright",
+    "on": 1,
+    "with": "(>'o')>"
+  },
+  {
+    "replace": "kleft",
+    "on": 1,
+    "with": "<('o'<)"
+  },
+  {
+    "replace": "dnno",
+    "on": 1,
+    "with": "```\\(°_o)/```"
+  },
+  {
+    "replace": "tableflip",
+    "on": 1,
+    "with": "(╯°□°）╯︵ ┻━┻"
+  }
+]

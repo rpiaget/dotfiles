@@ -22,6 +22,16 @@ The public Zsh configuration loads these optional, untracked files when they exi
 
 Never add credentials or employer-specific configuration to this repository.
 
+## macOS preferences
+
+After installation, review and apply the audited system preferences:
+
+```sh
+~/.dotfiles/macos/defaults.zsh
+```
+
+See `macos/README.md` for manual shortcuts, Raycast export/import, Shottr, text replacements, and intentionally omitted machine-specific state.
+
 ## Window management
 
-`devmode` manually toggles AeroSpace, borders, and SketchyBar. AeroSpace machine configuration is intentionally separate and should retain `start-at-login = false`.
+`devmode` manually toggles AeroSpace, borders, and SketchyBar. The linked AeroSpace configuration retains `start-at-login = false`.
