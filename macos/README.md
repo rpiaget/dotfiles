@@ -36,6 +36,8 @@ The unused SketchyBar Lua demo tree and its compiled ARM helper binaries are exc
 
 Use Raycast as the launcher and window-command tool. Enable Launch at Login after installation. Do not restore Alfred or Divvy.
 
+Use Raycast's built-in **Clipboard History** command instead of Alfred's clipboard utility. Assign Option-Command-C to preserve the familiar Alfred shortcut, grant Raycast the requested clipboard/accessibility permissions, and verify copied text and images appear. Preserve the capability, not the old clipboard contents.
+
 Before wiping the old Mac, run **Export Settings & Data** in Raycast and save the encrypted `.rayconfig` file in the Cisco OneDrive migration folder. The export includes settings, aliases, hotkeys, extensions, snippets, and window-management layouts. Store the export passphrase in 1Password; do not put it beside the export.
 
 On the new Mac, use Raycast’s **Import Settings & Data** command and select the desired categories.
@@ -62,7 +64,7 @@ Expected user-controlled login items:
 - Shottr
 - Dropbox, only if still wanted after the cloud-storage audit
 
-Cisco Secure Client, Microsoft SharePoint, and DisplayLink Manager are managed or hardware-specific and should be installed/configured through their supported flows. AeroSpace, Alfred, and Divvy should not be login items.
+Cisco Secure Client and Microsoft SharePoint should be installed or configured through Cisco’s supported provisioning flows. DisplayLink Manager is not needed with the current hardware and should not be reinstalled. AeroSpace, Alfred, and Divvy should not be login items.
 
 ## Intentionally omitted
 

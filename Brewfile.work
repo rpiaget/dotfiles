@@ -1,0 +1,9 @@
+tap "hashicorp/tap"
+
+# Work development and operations tools not supplied by Cisco provisioning.
+brew "aws-sam-cli"
+brew "awscli"
+brew "awslogs"
+brew "iproute2mac"
+brew "telnet"
+brew "hashicorp/tap/terraform"

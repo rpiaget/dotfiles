@@ -1,0 +1,16 @@
+# Personal applications intentionally separated from work bootstrap.
+brew "mas"
+
+cask "cursor"
+cask "dropbox"
+cask "spotify"
+cask "steam"
+cask "visual-studio-code"
+
+mas "Instapaper", id: 288545208
+
+# Start VS Code narrowly; add project-specific extensions only when needed.
+vscode "GitHub.vscode-pull-request-github"
+vscode "golang.go"
+vscode "ms-python.python"
+vscode "ms-python.vscode-pylance"

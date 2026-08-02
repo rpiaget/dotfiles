@@ -1,0 +1,18 @@
+#!/usr/bin/env zsh
+
+set -e
+
+DOTFILES_DIR="${0:A:h}"
+
+if [[ -x /opt/homebrew/bin/brew ]]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+elif [[ -x /usr/local/bin/brew ]]; then
+  eval "$(/usr/local/bin/brew shellenv)"
+fi
+
+if ! command -v brew >/dev/null 2>&1; then
+  print -u2 -- "Homebrew is required. Run $DOTFILES_DIR/install first."
+  exit 1
+fi
+
+brew bundle --file="$DOTFILES_DIR/Brewfile.personal" --verbose

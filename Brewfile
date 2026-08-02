@@ -1,5 +1,3 @@
-tap "aws/tap"
-tap "cyberark/tools"
 tap "eth-p/software"
 tap "felixkratz/formulae"
 tap "hqhq1025/clipaste"
@@ -7,178 +5,44 @@ tap "homebrew/bundle"
 tap "homebrew/cask"
 tap "homebrew/core"
 tap "nikitabobko/tap"
-tap "warrensbox/tap"
-# Tool for generating GNU Standards-compliant Makefiles
-brew "automake"
-# CLI tool to build, test, debug, and deploy Serverless applications using AWS SAM
-brew "aws-sam-cli"
-# Text processing system for reStructuredText
-brew "docutils"
-# Official Amazon AWS command-line interface
-brew "awscli"
-# Simple command-line tool to read AWS CloudWatch logs
-brew "awslogs"
-# Bourne-Again SHell, a UNIX command interpreter
+
+# Portable shell and development tools.
 brew "bash"
-# Programmable completion for Bash 3.2
-brew "bash-completion"
-# Programmable completion for Bash 4.2+
-brew "bash-completion@2", link: false
-# Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
-# Create and read constant databases
-brew "cdb"
-# Clipboard bridge used by Codex screenshot paste in Ghostty
-brew "hqhq1025/clipaste/clipaste"
-# GNU File, Shell, and Text utilities
 brew "coreutils"
-# Modern replacement for 'ls'
 brew "eza"
-# Collection of GNU find, xargs, and locate
 brew "findutils"
-# Command-line fuzzy finder written in Go
 brew "fzf"
-# GitHub command-line interface
 brew "gh"
-# GNU implementation of the famous stream editor
+brew "git"
 brew "gnu-sed"
-# Open source programming language to build simple/reliable/efficient software
 brew "go"
-# User-friendly cURL replacement (command-line HTTP client)
 brew "httpie"
-# CLI wrapper for basic network utilities on macOS - ip command
-brew "iproute2mac"
-# Lightweight and flexible command-line JSON processor
 brew "jq"
-# Provides library functionality for FIDO U2F & FIDO 2.0, including USB
-brew "libfido2"
-# Library for manipulating PNG images
-brew "libpng"
-# Zstandard is a real-time compression algorithm
-brew "zstd"
-# Mac App Store command-line interface
-brew "mas"
-# Netwide Assembler (NASM) is an 80x86 assembler
-brew "nasm"
-# Platform built on V8 to build network applications
 brew "node"
-# Manage multiple Node.js versions
 brew "nvm"
-# Code formatter for JavaScript, CSS, JSON, GraphQL, Markdown, YAML
 brew "prettier"
-# Current Homebrew Python for general-purpose use
 brew "python"
-# Manage project-specific Python versions
 brew "pyenv"
-# Search tool like grep and The Silver Searcher
 brew "ripgrep"
-# User interface to the TELNET protocol
-brew "telnet"
-# Simplified and community-driven man pages
 brew "tldr"
-# Display directories as trees (with optional color/HTML output)
 brew "tree"
-# JavaScript package manager
 brew "yarn"
-# Tracks most-used directories to make cd smarter
 brew "z"
-# Fish-like autosuggestions for Zsh
 brew "zsh-autosuggestions"
-# Vim key bindings for Zsh
 brew "zsh-vi-mode"
-# Bash scripts that integrate bat with various command-line tools
 brew "eth-p/software/bat-extras"
-# Window borders used by devmode
+
+# Clipboard and opt-in window-management services.
+brew "hqhq1025/clipaste/clipaste"
 brew "felixkratz/formulae/borders"
-# Customizable macOS status bar used by devmode
 brew "felixkratz/formulae/sketchybar"
-# Tiling window manager; configured not to start at login
+
+# Base applications used on both work and personal projects.
+cask "1password-cli"
 cask "nikitabobko/tap/aerospace"
-# Display management tool
-cask "betterdisplay"
-# Font used by the SketchyBar configuration
 cask "font-hack-nerd-font"
-# Primary terminal
 cask "ghostty"
-# Launcher and window-command tool
 cask "raycast"
-# Screenshot and OCR utility
 cask "shottr"
-# Docker Engine, Compose, and Desktop UI
 cask "docker-desktop"
-# Git client focusing on productivity
-cask "gitkraken"
-# Game development engine
-cask "godot"
-# HTTP and GraphQL Client
-cask "insomnia"
-# System monitoring app
-cask "istat-menus"
-# Interface for reading and syncing eBooks
-cask "kindle"
-# Client-side GUI application for modern database development and operations
-cask "nosql-workbench"
-# Knowledge base that works on top of a local folder of plain text Markdown files
-cask "obsidian"
-# MySQL/MariaDB database management
-cask "sequel-ace"
-# Music streaming service
-cask "spotify"
-# Video game digital distribution service
-cask "steam"
-# To-do list
-cask "todoist"
-# Virtualizer for x86 hardware
-cask "virtualbox"
-# Open-source code editor
-cask "visual-studio-code"
-mas "CleanMyMac X", id: 1339170533
-mas "Display Menu", id: 549083868
-mas "EasyRes", id: 688211836
-mas "Fantastical", id: 975937182
-mas "Instapaper", id: 288545208
-mas "Kindle", id: 405399194
-mas "Messenger", id: 1480068668
-mas "MKPlayer", id: 1335612105
-mas "NordVPN", id: 905953485
-mas "Reeder", id: 1529448980
-mas "Save to Raindrop.io", id: 1549370672
-vscode "42Crunch.vscode-openapi"
-vscode "4ops.terraform"
-vscode "alefragnani.Bookmarks"
-vscode "be5invis.vscode-custom-css"
-vscode "bmewburn.vscode-intelephense-client"
-vscode "bungcip.better-toml"
-vscode "ChakrounAnas.turbo-console-log"
-vscode "dbaeumer.vscode-eslint"
-vscode "dzannotti.vscode-babel-coloring"
-vscode "eamodio.gitlens"
-vscode "eriklynd.json-tools"
-vscode "GitHub.vscode-pull-request-github"
-vscode "golang.go"
-vscode "kpping.vsmacs"
-vscode "mgmcdermott.vscode-language-babel"
-vscode "mikestead.dotenv"
-vscode "ms-azuretools.vscode-docker"
-vscode "ms-python.isort"
-vscode "ms-python.python"
-vscode "ms-python.vscode-pylance"
-vscode "ms-toolsai.jupyter"
-vscode "ms-toolsai.jupyter-keymap"
-vscode "ms-toolsai.jupyter-renderers"
-vscode "ms-toolsai.vscode-jupyter-cell-tags"
-vscode "ms-toolsai.vscode-jupyter-slideshow"
-vscode "ms-vscode-remote.remote-containers"
-vscode "ms-vscode.cpptools"
-vscode "ms-vscode.sublime-keybindings"
-vscode "nickdemayo.vscode-json-editor"
-vscode "premparihar.gotestexplorer"
-vscode "quicktype.quicktype"
-vscode "redhat.java"
-vscode "redhat.vscode-yaml"
-vscode "vscjava.vscode-java-debug"
-vscode "vscjava.vscode-java-dependency"
-vscode "vscjava.vscode-java-pack"
-vscode "vscjava.vscode-java-test"
-vscode "vscjava.vscode-maven"
-vscode "wesbos.theme-cobalt2"
