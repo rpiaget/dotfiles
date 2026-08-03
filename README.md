@@ -16,6 +16,11 @@ and offers the work, personal, and macOS-defaults layers interactively. The base
 layer includes the 1Password desktop app and CLI, ChatGPT desktop with Codex,
 the Codex CLI, and Ghostty, so none of those are prerequisites.
 
+The setup uses official Homebrew packages whenever available. For Clipaste,
+JankyBorders, SketchyBar, and AeroSpace, it taps their upstream repositories and
+trusts only the exact reviewed formulae or cask rather than trusting each entire
+third-party tap.
+
 Cisco enrollment, Duo Desktop, account sign-in, 1Password SSH-agent approval,
 OneDrive synchronization, and restoration of Cisco-only files remain separate
 authenticated steps.

@@ -64,6 +64,8 @@ if [[ ! -d "$NEW_MAC_DOTFILES_DIR/.git" ]]; then
 else
   echo
   echo "Using existing dotfiles checkout at $NEW_MAC_DOTFILES_DIR"
+  echo "Updating it to the latest published bootstrap..."
+  git -C "$NEW_MAC_DOTFILES_DIR" pull --ff-only
 fi
 
 echo

@@ -1,9 +1,5 @@
-tap "eth-p/software"
 tap "felixkratz/formulae"
 tap "hqhq1025/clipaste"
-tap "homebrew/bundle"
-tap "homebrew/cask"
-tap "homebrew/core"
 tap "nikitabobko/tap"
 
 # Portable shell and development tools.
@@ -31,7 +27,7 @@ brew "yarn"
 brew "z"
 brew "zsh-autosuggestions"
 brew "zsh-vi-mode"
-brew "eth-p/software/bat-extras"
+brew "bat-extras"
 
 # Clipboard and opt-in window-management services.
 brew "hqhq1025/clipaste/clipaste"
