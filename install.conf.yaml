@@ -4,6 +4,10 @@
 
 - clean: ['~']
 
+- shell:
+  - command: ./prepare-config-links.zsh
+    description: Preserve conflicting application config directories
+
 - link:
     ~/.zsh:
     ~/.vimrc:
