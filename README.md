@@ -2,6 +2,24 @@
 
 Portable personal configuration for a fresh macOS development environment.
 
+## Bootstrap a bare Mac
+
+From the built-in macOS Terminal, with only internet access:
+
+```sh
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/rpiaget/dotfiles/main/bootstrap-macos)"
+```
+
+`bootstrap-macos` triggers Apple's Command Line Tools installer when needed,
+installs Homebrew, clones this repository over HTTPS, installs the base layer,
+and offers the work, personal, and macOS-defaults layers interactively. The base
+layer includes the 1Password desktop app and CLI, ChatGPT desktop with Codex,
+the Codex CLI, and Ghostty, so none of those are prerequisites.
+
+Cisco enrollment, Duo Desktop, account sign-in, 1Password SSH-agent approval,
+OneDrive synchronization, and restoration of Cisco-only files remain separate
+authenticated steps.
+
 ## Install the base layer
 
 ```sh
@@ -10,7 +28,7 @@ cd ~/.dotfiles
 ./install
 ```
 
-The base installer creates symlinks with Dotbot and installs the intentionally small shared toolset in `Brewfile`: shell and development CLIs, Git, Go, Python, Node, Docker Desktop, Ghostty, Raycast, Shottr, and the opt-in AeroSpace/SketchyBar environment. It also starts the Clipaste service.
+The base installer creates symlinks with Dotbot and installs the intentionally small shared toolset in `Brewfile`: shell and development CLIs, Git, Go, Python, Node, Docker Desktop, 1Password Desktop and CLI, ChatGPT/Codex desktop, Codex CLI, Ghostty, Raycast, Shottr, and the opt-in AeroSpace/SketchyBar environment. It also starts the Clipaste service.
 
 ## Optional install layers
 

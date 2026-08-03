@@ -1,0 +1,108 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+NEW_MAC_DOTFILES_DIR="${NEW_MAC_DOTFILES_DIR:-$HOME/.dotfiles}"
+DOTFILES_REPOSITORY="https://github.com/rpiaget/dotfiles.git"
+
+if [[ "$(uname -s)" != "Darwin" ]]; then
+  echo "This bootstrap supports macOS only." >&2
+  exit 1
+fi
+
+echo
+echo "=== Selective Mac bootstrap ==="
+echo
+echo "This installs Apple's Command Line Tools, Homebrew, the public dotfiles,"
+echo "the shared application/tool layer, and optionally the work and personal layers."
+echo "Cisco enrollment, Duo Desktop, OneDrive sign-in, and account authentication"
+echo "remain interactive or Cisco-managed."
+echo
+
+if ! xcode-select -p >/dev/null 2>&1; then
+  echo "Apple Command Line Tools are required."
+  xcode-select --install
+  echo
+  read -r -p "Finish the Apple installer, then press Return to continue: " _
+  if ! xcode-select -p >/dev/null 2>&1; then
+    echo "Command Line Tools are not available yet. Finish that installation and rerun this command." >&2
+    exit 1
+  fi
+fi
+
+if ! command -v brew >/dev/null 2>&1; then
+  echo
+  echo "Installing Homebrew..."
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
+
+if [[ -x /opt/homebrew/bin/brew ]]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+elif [[ -x /usr/local/bin/brew ]]; then
+  eval "$(/usr/local/bin/brew shellenv)"
+fi
+
+if ! command -v brew >/dev/null 2>&1; then
+  echo "Homebrew installation completed but brew is not available in this shell." >&2
+  exit 1
+fi
+
+if ! command -v git >/dev/null 2>&1; then
+  brew install git
+fi
+
+if [[ -e "$NEW_MAC_DOTFILES_DIR" && ! -d "$NEW_MAC_DOTFILES_DIR/.git" ]]; then
+  echo "$NEW_MAC_DOTFILES_DIR already exists but is not a Git checkout." >&2
+  echo "Move it aside or set NEW_MAC_DOTFILES_DIR to another location, then retry." >&2
+  exit 1
+fi
+
+if [[ ! -d "$NEW_MAC_DOTFILES_DIR/.git" ]]; then
+  echo
+  echo "Cloning portable dotfiles over HTTPS..."
+  git clone "$DOTFILES_REPOSITORY" "$NEW_MAC_DOTFILES_DIR"
+else
+  echo
+  echo "Using existing dotfiles checkout at $NEW_MAC_DOTFILES_DIR"
+fi
+
+echo
+echo "Installing the shared base layer..."
+"$NEW_MAC_DOTFILES_DIR/install"
+
+echo
+read -r -p "Install the Cisco work command-line layer now? [Y/n] " install_work
+if [[ ! "$install_work" =~ ^[Nn]$ ]]; then
+  "$NEW_MAC_DOTFILES_DIR/install-work"
+fi
+
+echo
+read -r -p "Install the selected personal applications now? [Y/n] " install_personal
+if [[ ! "$install_personal" =~ ^[Nn]$ ]]; then
+  echo "Instapaper requires the Mac App Store to be signed in."
+  "$NEW_MAC_DOTFILES_DIR/install-personal"
+fi
+
+echo
+read -r -p "Apply the reviewed portable macOS preferences now? [Y/n] " apply_defaults
+if [[ ! "$apply_defaults" =~ ^[Nn]$ ]]; then
+  "$NEW_MAC_DOTFILES_DIR/macos/defaults.zsh"
+fi
+
+echo
+echo "=== Automated bootstrap complete ==="
+echo
+echo "Installed by the base layer:"
+echo "  - 1Password Desktop and CLI"
+echo "  - ChatGPT desktop (including Codex) and Codex CLI"
+echo "  - Ghostty, Docker Desktop, Raycast, Shottr"
+echo "  - portable shell, Git, language, and window-management tooling"
+echo
+echo "Next:"
+echo "  1. Open 1Password and add both required accounts."
+echo "  2. Enable 1Password Settings > Developer > Use the SSH agent."
+echo "  3. Sign in to Cisco OneDrive and keep the migration folder downloaded."
+echo "  4. From that folder, run: zsh ./restore-reviewed-config.zsh"
+echo "  5. Restore Codex history before beginning substantial new Codex work."
+echo
+echo "Open a new Ghostty window to load the linked Zsh configuration."

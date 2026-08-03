@@ -39,7 +39,10 @@ brew "felixkratz/formulae/borders"
 brew "felixkratz/formulae/sketchybar"
 
 # Base applications used on both work and personal projects.
+cask "1password"
 cask "1password-cli"
+cask "chatgpt"
+cask "codex"
 cask "nikitabobko/tap/aerospace"
 cask "font-hack-nerd-font"
 cask "ghostty"
