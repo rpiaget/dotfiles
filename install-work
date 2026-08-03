@@ -15,4 +15,9 @@ if ! command -v brew >/dev/null 2>&1; then
   exit 1
 fi
 
+# Terraform is the only package retained from HashiCorp's official tap.
+# Trust that exact formula rather than granting trust to every formula in the tap.
+brew tap hashicorp/tap
+brew trust --formula hashicorp/tap/terraform
+
 brew bundle --file="$DOTFILES_DIR/Brewfile.work" --verbose
