@@ -27,7 +27,7 @@ The script intentionally does not copy the entire preferences database. Display 
 Dotbot links these reviewed configurations into `~/.config`:
 
 - AeroSpace: manual `devmode`, with `start-at-login = false`
-- Ghostty: custom Catppuccin Mocha theme and Command-V terminal paste binding
+- Ghostty: custom Catppuccin Mocha theme; native Command-V paste works with Clipaste
 - SketchyBar: the active shell configuration and five referenced plugins
 
 The unused SketchyBar Lua demo tree and its compiled ARM helper binaries are excluded.
